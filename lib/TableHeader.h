@@ -5,26 +5,30 @@
 #include <array>
 #include <string>
 
+
 #include "Column.h"
+#include "DatabaseError.h"
 
 class TableHeader
 {
     private:
         std::string table_name;
-        std::vector<Column> col_desc; 
+        std::vector<Column> column_set; 
+
+        bool checkTableName(const std::string &_str) const;
 
     public:
-        TableHeader(std::string _t_name);
+        TableHeader(const std::string &_t_name);
         TableHeader() = default;
 
         bool inputNewColumn(std::string col_name, std::string data_type);
         bool inputNewColumn(const Column &col);
 
-        std::vector<Column> getColTypes() const;
-        Column operator[](int idx);
-
         std::string getTableName() const;
-        int size() const;
+        std::vector<Column> getColumnSet() const;
+
+        Column operator[](int idx);
+        int size() const;   
 };
 
 

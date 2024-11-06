@@ -1,41 +1,36 @@
 #include "../lib/TableHeader.h"
 
-TableHeader::TableHeader(std::string _t_name)
+// private //
+
+bool TableHeader::checkTableName(const std::string &_str) const
+{   
+    return (_str.find('%') == std::string::npos);
+}
+
+// public // 
+
+TableHeader::TableHeader(const std::string &_t_name)
 {
-    this -> table_name = _t_name;
+    table_name = _t_name;
 }
 
 bool TableHeader::inputNewColumn(std::string col_name, std::string data_type)
 {
-    this -> col_desc.push_back(Column(col_name, data_type));
-
+    column_set.push_back(Column(col_name, data_type));
     return true;
 }
 
 bool TableHeader::inputNewColumn(const Column &col)
 {
-    // check if column is valid (method inside Column)
-    this -> col_desc.push_back(col);
-
+    /* check column name */
+    column_set.push_back(col);
     return true;
 }
 
-int TableHeader::size() const
-{
-    return this -> col_desc.size();
-}
+std::vector<Column> TableHeader::getColumnSet() const { return column_set; }
 
-std::vector<Column> TableHeader::getColTypes() const 
-{
-    return this -> col_desc;
-}
+Column TableHeader::operator[](int idx) { return column_set[idx]; }
 
-Column TableHeader::operator[](int idx)
-{
-    return this -> col_desc[idx];
-}
+int TableHeader::size() const { return column_set.size(); }
 
-std::string TableHeader::getTableName() const
-{
-    return this -> table_name;
-}
+std::string TableHeader::getTableName() const { return table_name; }

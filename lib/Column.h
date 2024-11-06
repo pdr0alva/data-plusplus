@@ -7,8 +7,7 @@ class Column
 {
     private:
         std::string cinfo[4];
-        std::string fixColumnName(std::string str); 
-        bool checkColumnToken(const std::string &str);
+        bool checkColumnName(const std::string &_name) const;
 
     public:
         Column(const std::string &_name, const std::string &_type);

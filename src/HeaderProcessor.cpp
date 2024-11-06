@@ -18,7 +18,7 @@ TableHeader HeaderProcessor::processRawString(std::string &raw_data) const
             break;
         }
     }
-
+    
     th.inputNewColumn(name, name);
 
     return th;

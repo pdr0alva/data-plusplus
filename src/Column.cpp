@@ -2,32 +2,24 @@
 
 Column::Column(const std::string &_name, const std::string &_type)
 {
-    this -> fixColumnName(_name);
-
-    this -> cinfo[0] = _name;
-    this -> cinfo[1] = _type;
+    cinfo[0] = _name;
+    cinfo[1] = _type;
 }
 
 std::string Column::setName(const std::string &_name) 
 {
-    this -> cinfo[0] = fixColumnName(_name);
+    cinfo[0] = _name;
 }
 
 std::string Column::setType(const std::string &_t)
 {
     /* ! CHECK IF TYPE IS VALID */    
-    this -> cinfo[1] = _t;
+    cinfo[1] = _t;
 }
 
-std::string Column::fixColumnName(std::string _name)
+bool Column::checkColumnName(const std::string &_name) const
 {
-    for (size_t i = 0; i < _name.size(); i++)
-    {
-        if (_name[i] == '{' || _name[i] == '}')
-            _name.erase(_name.begin() + i);
-    }
-
-    return _name; 
+    return _name.find('"') == std::string::npos;
 }
 
 std::string Column::operator[](int idx) const
