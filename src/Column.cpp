@@ -35,6 +35,5 @@ std::string Column::operator[](int idx) const
     return cinfo[idx];
 }
 
-
 std::string Column::getName() const { return cinfo[0]; }
 std::string Column::getType() const { return cinfo[1]; }
